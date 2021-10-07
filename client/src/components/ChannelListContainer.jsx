@@ -28,11 +28,20 @@ const CompanyHeader = () => (
 )
 
 const ChannelListContainer = () => {
+    // I Love how we pass list props in TeamChannelList
     return (
         <>
             <SideBar />
             <div className="channel-list__list__wrapper" >
                 <CompanyHeader />
+                <ChannelSearch />
+                <ChannelList 
+                    filters={{}}
+                    channelRenderFilterFn={() => {}}
+                    List={(listProps) => (
+                        <TeamChannelList {...listProps} />
+                    )}
+                />
             </div>
         </>
     )
