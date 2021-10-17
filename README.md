@@ -11,8 +11,8 @@ For client:
 
 For server:
 make sure to create `.env` file under `server` folder inside it you need to specify:
-STREAM_API_KEY = 
-STREAM_API_SECRET = 
-STREAM_API_ID = 
+STREAM_API_KEY =  
+STREAM_API_SECRET =  
+STREAM_API_ID =  
 
-All taken from you getstream account.
+All taken from you getstream account.  
