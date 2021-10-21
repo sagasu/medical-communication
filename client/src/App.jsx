@@ -1,11 +1,14 @@
-import React from 'react'
+import React, {useState} from 'react'
 import {StreamChat} from 'stream-chat'
 import {Chat} from 'stream-chat-react'
 import Cookies from 'universal-cookie'
 import dotenv from 'dotenv';
 import {ChannelListContainer, ChannelContainer, Auth} from './components'
 
+
+import 'stream-chat-react/dist/css/index.css';
 import './App.css';
+
 dotenv.config();
 const apiKey = process.env.REACT_APP_STREAM_KEY;
 
@@ -29,13 +32,28 @@ if(authToken){
 
 const App = () => {
 
+    const [createType, setCreateType] = useState('');
+    const [isCreating, setIsCreating] = useState('');
+    const [isEditing, setIsEditing] = useState('');
+
     if(!authToken) return <Auth />
 
     return (
         <div className="app__wrapper">
             <Chat client={client} theme="team light">
-                <ChannelListContainer/>
-                <ChannelContainer/>
+                <ChannelListContainer
+                    isCreating={isCreating}
+                    setCreateType={setCreateType}
+                    setIsCreating={setIsCreating}
+                    setIsEditing={setIsEditing}
+                />
+                <ChannelContainer
+                    isCreating={isCreating}
+                    isEditing={isEditing}
+                    setIsCreating={setIsCreating}
+                    setIsEditing={setIsEditing}
+                    createType={createType}
+                />
             </Chat>
         </div>
     )
