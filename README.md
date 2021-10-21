@@ -6,11 +6,14 @@ For communication I am using [stream](https://getstream.io/) and ...
 # Run
 
 For client:  
+make sure to create `.env` file under `client` folder:  
+REACT_APP_STREAM_KEY=""  
+  
 `cd client`
 `npm start`
 
 For server:
-make sure to create `.env` file under `server` folder inside it you need to specify:
+make sure to create `.env` file under `server` folder inside it you need to specify:  
 STREAM_API_KEY =  
 STREAM_API_SECRET =  
 STREAM_API_ID =  

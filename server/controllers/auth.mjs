@@ -1,10 +1,13 @@
-
 import connect from 'getstream';
 import bcrypt from 'bcrypt';
 
 import StreamChat from 'stream-chat';
+import dotenv from 'dotenv';
+
 
 import crypto from 'crypto';
+
+dotenv.config();
 
 const api_key = process.env.STREAM_API_KEY;
 const api_secret = process.env.STREAM_API_SECRET;
@@ -12,16 +15,19 @@ const api_id = process.env.STREAM_API_ID;
 
 const signup = async (req, res) => {
     try {
+        console.log(connect);
+        console.log(api_key);
+        
         const {fullName, username, password, phoneNumber} = req.body;
 
         const userId = crypto.randomBytes(16).toString('hex');
 
-        const serverClient = connect(api_key, api_secret, api_id);
+        const serverClient = connect.connect(api_key, api_secret, api_id);
 
         const hashedPassword = await bcrypt.hash(password, 10);
 
         const token = serverClient.createUserToken(userId);
-
+        console.log(token);
         res.status(200).json({token, fullName, username, userId, hashedPassword, phoneNumber});
     }catch(error){
         console.log(error);
@@ -33,8 +39,8 @@ const login = async (req, res) => {
     try {
         const {username, password} = req.body;
 
-        const serverClient = connect(api_key, api_secret, api_id);
-
+        const serverClient = connect.connect(api_key, api_secret, api_id);
+        console.log(StreamChat);
         const client = StreamChat.getInstance(api_key, api_secret);
 
         const {user} = await client.queryUsers({name: username});
