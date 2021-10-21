@@ -41,13 +41,13 @@ const login = async (req, res) => {
 
         const serverClient = connect.connect(api_key, api_secret, api_id);
         console.log(StreamChat);
-        const client = StreamChat.getInstance(api_key, api_secret);
+        const client = StreamChat.StreamChat.getInstance(api_key, api_secret);
 
-        const {user} = await client.queryUsers({name: username});
+        const {users} = await client.queryUsers({name: username});
 
         if(!users.length) return res.status(400).json({message: 'User not found'});
-
-        const success = await bcrypt.compare(password, users[0].hashedPasswords);
+        console.log(users[0]);
+        const success = await bcrypt.compare(password, users[0].hashedPassword);
 
         const token = serverClient.createUserToken(users[0].id);
 
